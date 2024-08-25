@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, Rocket } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Header() {
@@ -29,8 +29,10 @@ export default function Header() {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="w-full justify-end items-center hidden md:flex space-x-4">
-        <Link href="/login">
-          <Button>Login</Button>
+        <Link href="/register">
+          <Button>
+          <Rocket className="mr-2 h-4 w-4" />
+          Get Started</Button>
         </Link>
       </div>
       <Sheet>
@@ -53,7 +55,7 @@ export default function Header() {
           <ul className="flex flex-col gap-3 mt-4">
             <li>
               <SheetTrigger asChild>
-                <Link href="/login">Login</Link>
+                <Link href="/register">Get Started</Link>
               </SheetTrigger>
             </li>
           </ul>
