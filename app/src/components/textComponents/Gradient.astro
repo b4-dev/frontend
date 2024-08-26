@@ -1,0 +1,18 @@
+---
+const { start } = Astro.props;
+const { end } = Astro.props;
+
+const { style } = Astro.props;
+---
+
+<span
+  class="gradient"
+  style=`background: linear-gradient(to right, ${start}, ${end});
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent; ${style}
+`
+>
+  <slot />
+</span>
