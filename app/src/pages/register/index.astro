@@ -1,0 +1,68 @@
+---
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ArrowRight } from "lucide-react";
+import '@/styles/globals.css'
+import Navbar from '@/components/ui/NavigationMenuWrapper';
+---
+
+<script is:inline>
+	const getThemePreference = () => {
+		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+			return localStorage.getItem('theme');
+		}
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	};
+	const isDark = getThemePreference() === 'dark';
+	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+ 
+	if (typeof localStorage !== 'undefined') {
+		const observer = new MutationObserver(() => {
+			const isDark = document.documentElement.classList.contains('dark');
+			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+		});
+		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+	}
+</script>
+
+<Navbar/>
+<section class="flex justify-center items-center mx-auto max-w-md py-8 md:py-12 lg:py-24">
+  <div class="w-full space-y-6">
+    <div class="space-y-2 text-center">
+      <h1 class="text-3xl font-bold">Create an Account</h1>
+      <p class="text-gray-500 dark:text-gray-400">Sign up to start blogging with B4Dev</p>
+    </div>
+    <form class="space-y-4">
+      <div class="space-y-2">
+        <Label htmlFor="username">Username</Label>
+        <Input id="username" placeholder="johndoe" required type="text" />
+      </div>
+      <div class="space-y-2">
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" placeholder="john@example.com" required type="email" />
+      </div>
+      <div class="space-y-2">
+        <Label htmlFor="password">Password</Label>
+        <Input id="password" required type="password" />
+      </div>
+      <div class="space-y-2">
+        <Label htmlFor="confirm-password">Confirm Password</Label>
+        <Input id="confirm-password" required type="password" />
+      </div>
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" id="terms" class="rounded border-gray-300 text-primary focus:ring-primary"/>
+        <label class="text-sm text-gray-600 dark:text-gray-400">
+          I agree to the <a href="#" class="text-primary hover:underline">Terms of Service</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a>
+        </label>
+      </div>
+      <Button type="submit" class="w-full">
+        <ArrowRight className="mr-2 h-4 w-4" />
+        Create Account
+      </Button>
+    </form>
+    <p class="text-center text-sm text-gray-600 dark:text-gray-400">
+      Already have an account? <a href="/login" class="text-primary hover:underline">Log in</a>
+    </p>
+  </div>
+</section>
